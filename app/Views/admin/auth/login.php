@@ -43,3 +43,9 @@
       </div>
     </div>
 <?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<script>
+  console.log('Hello world!')
+</script>
+<?= $this->endSection() ?>
