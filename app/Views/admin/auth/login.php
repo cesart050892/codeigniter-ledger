@@ -13,15 +13,15 @@
                 <div class="card-body p-6">
                   <div class="card-title">Login to your account</div>
                   <div class="form-group">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label class="form-label">User name</label>
+                    <input type="" class="form-control" id="inputUser" aria-describedby="" placeholder="Enter user name" required>
                   </div>
                   <div class="form-group">
                     <label class="form-label">
                       Password
                       <a href="./forgot-password.html" class="float-right small">I forgot password</a>
                     </label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control" id="inputPass" placeholder="Password" required>
                   </div>
                   <div class="form-group">
                     <label class="custom-control custom-checkbox">
