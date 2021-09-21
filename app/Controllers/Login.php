@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\Web;
+namespace App\Controllers;
 
-use App\Controllers\BaseController;
+// use App\Controllers\BaseController;
 
 class Login extends BaseController
 {
