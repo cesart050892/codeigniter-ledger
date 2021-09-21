@@ -13,8 +13,8 @@
                 <div class="card-body p-6">
                   <div class="card-title">Login to your account</div>
                   <div class="form-group">
-                    <label class="form-label">User name</label>
-                    <input type="" class="form-control" id="inputUser" aria-describedby="" placeholder="Enter user name" required>
+                    <label class="form-label">Username</label>
+                    <input type="" class="form-control" id="inputUser" aria-describedby="" placeholder="Username" required>
                   </div>
                   <div class="form-group">
                     <label class="form-label">
