@@ -17,14 +17,14 @@ class TypeAcc extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'code'	=> [
-				'type'       => 'VARCHAR',
-				'constraint' => '75',
-			],
 			'type-account'	=> [
 				'type'       => 'VARCHAR',
 				'constraint' => '75',
 			],
+			'code'	=> [
+				'type'       => 'VARCHAR',
+				'constraint' => '75',
+			]
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->addField("created_at DATETIME NULL DEFAULT NULL");
