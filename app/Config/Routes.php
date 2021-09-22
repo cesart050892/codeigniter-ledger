@@ -52,6 +52,10 @@ $routes->get('dashboard', 'Dashboard::index');
 		$routes->post('signup', 'Auth::signup');
 		$routes->post('login', 'Auth::login');
 	});
+
+	$routes->group('me', function ($routes) {
+		$routes->get('logout', 'Auth::logout');
+	});
  });
 
 /*
