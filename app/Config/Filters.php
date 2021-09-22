@@ -37,7 +37,7 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             // 'csrf',
-            'web' => ['except' => [ 'api' , 'api/auth/*', 'login']] // 'register', 'forgot', 'recovery'
+            'web' => ['except' => [ 'api' , 'api/auth/*', '/']] // 'register', 'forgot', 'recovery'
         ],
         'after' => [
             'toolbar',

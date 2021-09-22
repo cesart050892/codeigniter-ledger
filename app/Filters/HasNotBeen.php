@@ -29,7 +29,7 @@ class HasNotBeen implements FilterInterface
 		//
 		try {
 			if (!session('isLoggedIn')) {
-				return redirect()->to(base_url('login'));
+				return redirect()->to(base_url('/'));
 			}
 		} catch (\Exception $e) {
 			$data = [

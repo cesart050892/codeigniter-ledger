@@ -7,17 +7,17 @@ use CodeIgniter\Model;
 class Auth extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'auths';
+    protected $table                = 'auth';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
-    protected $returnType           = 'array';
-    protected $useSoftDeletes       = false;
+    protected $returnType           = \App\Entities\Auth::class;
+    protected $useSoftDeletes       = true;
     protected $protectFields        = true;
-    protected $allowedFields        = [];
+    protected $allowedFields        = ['email', 'username', 'password'];
 
     // Dates
-    protected $useTimestamps        = false;
+    protected $useTimestamps        = true;
     protected $dateFormat           = 'datetime';
     protected $createdField         = 'created_at';
     protected $updatedField         = 'updated_at';

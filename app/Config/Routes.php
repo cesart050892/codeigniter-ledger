@@ -38,7 +38,7 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Login::index');
 
 /*
  * --------------------------------------------------------------------
@@ -46,9 +46,11 @@ $routes->get('/', 'Home::index');
  * --------------------------------------------------------------------
  */
 
- $routes->group('api', ['namespace' => 'App\Controllers\Api', 'filter' => 'throttle'], function($routes){
-    $routes->get('/', 'Home::index');
-    $routes->get('transactions', 'Transactions::index');
+ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes){
+	$routes->group('auth', function ($routes) {
+		$routes->post('signup', 'Auth::signup');
+		$routes->post('login', 'Auth::login');
+	});
  });
 
 /*
