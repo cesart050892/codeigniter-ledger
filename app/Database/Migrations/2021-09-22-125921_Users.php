@@ -37,6 +37,7 @@ class Users extends Migration
 				'type'           => 'BIGINT',
 				'constraint'     => 11,
 				'unsigned'       => true,
+				'null'			 => false
 			],
 		]);
 		$this->forge->addKey('id', true);
