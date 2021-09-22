@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\APIHasNotBeen;
+use App\Filters\HasAlready;
 use App\Filters\HasNotBeen;
 use App\Filters\Throttle;
 use CodeIgniter\Config\BaseConfig;
@@ -24,7 +25,8 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'api'      => APIHasNotBeen::class,
         'web'      => HasNotBeen::class,
-        'throttle' => Throttle::class
+        'throttle' => Throttle::class,
+        'no-auth'  => HasAlready::class
     ];
 
     /**
