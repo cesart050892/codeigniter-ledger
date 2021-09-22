@@ -39,6 +39,7 @@ $routes->setAutoRoute(true);
  */
 
 $routes->get('/', 'Login::index', ['filter' => 'no-auth']);
+$routes->get('dashboard', 'Dashboard::index');
 
 /*
  * --------------------------------------------------------------------
