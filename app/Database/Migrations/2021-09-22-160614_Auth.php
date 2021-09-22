@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Users extends Migration
+class Auth extends Migration
 {
-	protected $name = 'users';
+	protected $name = 'auth';
 
 	public function up()
 	{
@@ -16,35 +16,24 @@ class Users extends Migration
 				'constraint'     => 11,
 				'unsigned'       => true,
 				'auto_increment' => true,
-			],
-			'name'	=> [
+            ],
+            'email'	=> [
 				'type'       => 'VARCHAR',
 				'constraint' => '75',
 			],
-			'surname'	=> [
+            'username'	=> [
 				'type'       => 'VARCHAR',
 				'constraint' => '75',
 			],
-			'address'	=> [
+            'password'	=> [
 				'type'       => 'VARCHAR',
-				'constraint' => '75',
-			],
-			'phone'	=> [
-				'type'       => 'VARCHAR',
-				'constraint' => '75',
-			],
-            'credential_fk'	=> [
-				'type'           => 'BIGINT',
-				'constraint'     => 11,
-				'unsigned'       => true,
-			],
+				'constraint' => '225',
+			]
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->addField("created_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addField("updated_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addField("deleted_at DATETIME NULL DEFAULT NULL");
-		$this->forge->addForeignKey('credential_fk', 'auth', 'id', 'cascade', 'cascade');
-		$this->forge->addUniqueKey('credential_fk');
 		$this->forge->createTable($this->name);
 	}
 
