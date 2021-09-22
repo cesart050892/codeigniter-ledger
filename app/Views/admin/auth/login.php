@@ -21,10 +21,10 @@
                 </div>
                 <form class="user">
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                    <input type="text" name="username" class="form-control form-control-user" id="exampleInputUsername" placeholder="Enter Username...">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                   </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
@@ -33,9 +33,7 @@
                         Me</label>
                     </div>
                   </div>
-                  <a href="index.html" class="btn btn-primary btn-user btn-block">
-                    Login
-                  </a>
+                  <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                   <hr>
                   <a href="index.html" class="btn btn-google btn-user btn-block">
                     <i class="fab fa-google fa-fw"></i> Login with Google
@@ -65,19 +63,23 @@
 
 <?= $this->endSection() ?>
 
-<?= $this->section('plugins')?>
-  <script>
-    $('form').submit(function (e) { 
-      e.preventDefault();
-      data = $(this).serialize()
-      $.ajax({
-        type: "post",
-        url: '<?= base_url('api/auth/login'); ?>',
-        data: data,
-        success: function (response) {
-          console.log('test1');
-        }
-      });
-    });
-  </script>
+<?= $this->section('plugins') ?>
+<script>
+  $('form').submit(function(e) {
+    e.preventDefault();
+    data = $(this).serialize()
+    console.log(data)
+    $.ajax({
+      type: "post",
+      url: '<?= base_url('api/auth/login'); ?>',
+      data: data,
+      success: function(response) {
+        location.reload(true);
+      },
+      errror: function(jqXHR, textStatus, errorThrown) {
+        alert(jqXHR);
+      }
+    })
+  });
+</script>
 <?= $this->endSection() ?>
