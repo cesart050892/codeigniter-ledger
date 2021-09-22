@@ -79,7 +79,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-primary logout">Logout</button>
                 </div>
             </div>
         </div>
@@ -95,8 +95,49 @@
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
 
-      <!-- SweetAlert2 -->
-  <script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+    <script>
+        function logout() {
+            $.ajax({
+                type: "GET",
+                url: '<?= base_url('api/me/logout'); ?>',
+                success: function(response) {
+                    location.reload(true);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Error!',
+                        'Server error!',
+                        'error'
+                    )
+                }
+            })
+        }
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        $('.logout').on('click', function() {
+            Swal.fire({
+                title: 'Ready to Leave?',
+                text: 'End your current session.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Logout'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    logout()
+                }
+            })
+        });
+    </script>
     <?= $this->renderSection('plugins-js') ?>
     <?= $this->renderSection('script') ?>
 
