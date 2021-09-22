@@ -68,16 +68,19 @@
   $('form').submit(function(e) {
     e.preventDefault();
     data = $(this).serialize()
-    console.log(data)
     $.ajax({
-      type: "post",
+      type: "POST",
       url: '<?= base_url('api/auth/login'); ?>',
       data: data,
       success: function(response) {
         location.reload(true);
       },
-      errror: function(jqXHR, textStatus, errorThrown) {
-        alert(jqXHR);
+      error: function(jqXHR, textStatus, errorThrown) {
+        Swal.fire(
+          'Error!',
+          'user or password does not match!',
+          'error'
+        )
       }
     })
   });
