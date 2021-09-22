@@ -15,9 +15,6 @@ class Users extends Seeder
             [
                 'name' => 'unknow',
                 'surname' => 'empty',
-                'email' => 'whoami@email.com',
-                'username' => 'whoami',
-                'password' => 'admin'
             ],
         ];
         foreach ($data as $key) {

@@ -15,6 +15,5 @@ class Init extends Seeder
 		$this->call('App\Database\Seeds\Data\Taccount');
 		$this->call('App\Database\Seeds\Data\Accounts');
 		$this->call('App\Database\Seeds\Data\Transactions');
-		$this->call('App\Database\Seeds\Data\Users');
 	}
 }
