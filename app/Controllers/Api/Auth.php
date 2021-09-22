@@ -26,8 +26,8 @@ class Auth extends ResourceController
                     "username"    => $this->request->getVar("username"),
                     "password"    => $this->request->getVar("password"),
                 ];
-                $user = new \App\Entities\Auth($data);
-                if ($this->model->save($user)) {
+                $credentials = new \App\Entities\Auth($data);
+                if ($this->model->save($credentials)) {
                     $data = [
                         "name"    => $this->request->getVar("name"),
                         "credential_fk"   => $this->model->insertID()
@@ -37,10 +37,10 @@ class Auth extends ResourceController
                     if ($userModel->save($user)) {
                         return $this->respond(array(
                             "status"    => 200,
-                            "message"     => "Welcome! " . $user->username,
+                            "message"     => "Welcome! " . $user->name,
                             "data"        => [
-                                "username"     => $user->username,
-                                "email"        => $user->email
+                                "username"     => $credentials->username,
+                                "email"        => $credentials->email
                             ]
                         ));
                     } else {
