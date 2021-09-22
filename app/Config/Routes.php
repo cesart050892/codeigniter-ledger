@@ -46,10 +46,9 @@ $routes->get('/', 'Home::index');
  * --------------------------------------------------------------------
  */
 
- $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes){
+ $routes->group('api', ['namespace' => 'App\Controllers\Api', 'filter' => 'throttle'], function($routes){
     $routes->get('/', 'Home::index');
-
-    $routes->get('transactions', 'Transactions::index', ['filter' => 'api']);
+    $routes->get('transactions', 'Transactions::index');
  });
 
 /*

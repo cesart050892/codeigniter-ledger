@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Filters\APIHasNotBeen;
 use App\Filters\HasNotBeen;
+use App\Filters\Throttle;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -22,7 +23,8 @@ class Filters extends BaseConfig
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
         'api'      => APIHasNotBeen::class,
-        'web'      => HasNotBeen::class
+        'web'      => HasNotBeen::class,
+        'throttle' => Throttle::class
     ];
 
     /**
