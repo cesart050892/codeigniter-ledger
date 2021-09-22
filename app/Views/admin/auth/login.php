@@ -64,3 +64,20 @@
 </div>
 
 <?= $this->endSection() ?>
+
+<?= $this->section('plugins')?>
+  <script>
+    $('form').submit(function (e) { 
+      e.preventDefault();
+      data = $(this).serialize()
+      $.ajax({
+        type: "post",
+        url: '<?= base_url('api/auth/login'); ?>',
+        data: data,
+        success: function (response) {
+          console.log('test1');
+        }
+      });
+    });
+  </script>
+<?= $this->endSection() ?>
