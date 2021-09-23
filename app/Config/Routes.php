@@ -57,6 +57,10 @@ $routes->get('dashboard', 'Accounts::index');
 	$routes->group('me', function ($routes) {
 		$routes->get('logout', 'Auth::logout');
 	});
+
+	$routes->group('accounts', function ($routes) {
+		$routes->get('/', 'Accounts::index');
+	});
  });
 
 /*

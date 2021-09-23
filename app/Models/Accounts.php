@@ -39,4 +39,20 @@ class Accounts extends Model
     protected $afterFind            = [];
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
+
+    // functions
+
+    public function getAll()
+    {
+        return $this->select('
+        accounts.id, 
+        taccount.`type-account`, 
+        taccount.`code` AS `code-general`, 
+        accounts.`code`, 
+        accounts.account, 
+        accounts.type_fk
+    ')
+            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->findAll();
+    }
 }
