@@ -45,7 +45,7 @@ Accounts
 <script>
     //------- SweetAlert2 -------------
     $(function() {
-        $('select').select2({});
+        $('#input-type').select2({});
     });
     //------- SweetAlert2 -------------
     const swal = Swal.mixin({
@@ -157,8 +157,8 @@ Accounts
         if (stateSelect) {
             $.get(baseUrl + '/api/accounts/type', (response) => {
                 $.each(response.data, function(key, value) {
-                    $('select').append(`<option value="${value.id}">${value.type}</option>`);
-                    $("select").val(value.id).trigger('change');
+                    $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
+                    $('#input-type').val(value.id).trigger('change');
                 });
                 stateSelect = false
             });
