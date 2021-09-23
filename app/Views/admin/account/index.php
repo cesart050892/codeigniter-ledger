@@ -42,53 +42,52 @@ Accounts
 
 <?= $this->section('script') ?>
 <script>
-    baseUrl = "<?= base_url()?>"
     //------- DataTable -------------
     var table = $("#account").DataTable({
-    ajax: {
-      type: "GET",
-      url: baseUrl + '/api/accounts',
-      dataSrc: function(response) {
-        return response.data;
-      },
-    },
-    columns: [
-      // { data: "id", title: "Id" },
-      {
-        data: null,
-        title: "Code",
-        render: function(data) {
-            console.log(data)
-          return `${data.general}.${data.code}`;
+        ajax: {
+            type: "GET",
+            url: baseUrl + '/api/accounts',
+            dataSrc: function(response) {
+                return response.data;
+            },
         },
-      },
-      {
-        data: "account",
-        title: "Account"
-      },
-      {
-        data: null,
-        title: "Actions",
-        render: function(data) {
-          return `
+        columns: [{
+                data: null,
+                title: "Code",
+                render: function(data) {
+                    console.log(data)
+                    return `${data.general}.${data.code}`;
+                },
+            },
+            {
+                data: "root",
+                title: "Type"
+            },
+            {
+                data: "account",
+                title: "Account"
+            },
+            {
+                data: null,
+                title: "Actions",
+                render: function(data) {
+                    return `
           <div class='text-center'>
-          <div class='btn-group'>
           <button class='btn btn-warning btn-sm' onClick="fnEdit(${data.id})">
           <i class="fas fa-edit"></i>
           </button>
           <button class='btn btn-danger btn-sm' onClick="fnDelete(${data.id})">
           <i class="fas fa-trash"></i>
           </button>
-          </div>
           </div>`;
-        },
-      },
-    ],
-    columnDefs: [{
-      className: "text-center select-checbox",
-      targets: "_all",
-    }, ],
-    responsive: true,
-  });
+                },
+            },
+        ],
+        columnDefs: [{
+            className: "text-center",
+            targets: "_all",
+        }, ],
+        responsive: true,
+    });
 </script>
 <?= $this->endSection() ?>
