@@ -38,4 +38,20 @@ class Accounts extends ResourceController
             return $this->failServerError();
         }
     }
+
+    public function edit($id = null)
+    {
+        try {
+            if ($resp = $this->model->getOne($id)) {
+                return $this->respond(array(
+                    'data'    => $resp
+                ));
+            } else {
+                return $this->failNotFound('can\'t be no found it');
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->failServerError();
+        }
+    }
 }

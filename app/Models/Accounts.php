@@ -55,4 +55,19 @@ class Accounts extends Model
             ->join('taccount', 'accounts.type_fk = taccount.id')
             ->findAll();
     }
+
+    public function getOne($id)
+    {
+        return $this->select('
+        accounts.id, 
+        taccount.`type-account` AS root, 
+        taccount.`code` AS general, 
+        accounts.`code`, 
+        accounts.account, 
+        accounts.type_fk AS `foreign`
+    ')
+            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->where('accounts.id', $id)
+            ->first();
+    }
 }
