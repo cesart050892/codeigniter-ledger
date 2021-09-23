@@ -42,59 +42,53 @@ Accounts
 
 <?= $this->section('script') ?>
 <script>
+    baseUrl = "<?= base_url()?>"
     //------- DataTable -------------
-
     var table = $("#account").DataTable({
-        ajax: {
-            type: "GET",
-            url: <?= base_url('api/accounts') ?>,
-            dataSrc: function(response) {
-                return response.data;
-            },
+    ajax: {
+      type: "GET",
+      url: baseUrl + '/api/accounts',
+      dataSrc: function(response) {
+        return response.data;
+      },
+    },
+    columns: [
+      // { data: "id", title: "Id" },
+      {
+        data: null,
+        title: "Code",
+        render: function(data) {
+            console.log(data)
+          return `${data.general}.${data.code}`;
         },
-        columns: [
-            // { data: "id", title: "Id" },
-            {
-                data: null,
-                title: "Users",
-                render: function(data) {
-                    return `${data.fullname}`;
-                },
-            },
-            {
-                data: "nick",
-                title: "Nickname"
-            },
-            {
-                data: null,
-                title: "Photo",
-                render: function(data) {
-                    return `<img src='${baseUrl}${data.img}' style='width:40px' alt="text"'>`
-                }
-            },
-            {
-                data: null,
-                title: "Actions",
-                render: function(data) {
-                    return `
-        <div class='text-center'>
-        <div class='btn-group'>
-        <button class='btn btn-warning btn-sm' onClick="fnEdit(${data.id})">
-        <i class="fas fa-edit"></i>
-        </button>
-        <button class='btn btn-danger btn-sm' onClick="fnDelete(${data.id})">
-        <i class="fas fa-trash"></i>
-        </button>
-        </div>
-        </div>`;
-                },
-            },
-        ],
-        columnDefs: [{
-            className: "text-center select-checbox",
-            targets: "_all",
-        }, ],
-        responsive: true,
-    });
+      },
+      {
+        data: "account",
+        title: "Account"
+      },
+      {
+        data: null,
+        title: "Actions",
+        render: function(data) {
+          return `
+          <div class='text-center'>
+          <div class='btn-group'>
+          <button class='btn btn-warning btn-sm' onClick="fnEdit(${data.id})">
+          <i class="fas fa-edit"></i>
+          </button>
+          <button class='btn btn-danger btn-sm' onClick="fnDelete(${data.id})">
+          <i class="fas fa-trash"></i>
+          </button>
+          </div>
+          </div>`;
+        },
+      },
+    ],
+    columnDefs: [{
+      className: "text-center select-checbox",
+      targets: "_all",
+    }, ],
+    responsive: true,
+  });
 </script>
 <?= $this->endSection() ?>

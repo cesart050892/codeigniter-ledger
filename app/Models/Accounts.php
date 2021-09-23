@@ -46,11 +46,11 @@ class Accounts extends Model
     {
         return $this->select('
         accounts.id, 
-        taccount.`type-account`, 
-        taccount.`code` AS `code-general`, 
+        taccount.`type-account` AS root, 
+        taccount.`code` AS general, 
         accounts.`code`, 
         accounts.account, 
-        accounts.type_fk
+        accounts.type_fk AS `foreign`
     ')
             ->join('taccount', 'accounts.type_fk = taccount.id')
             ->findAll();
