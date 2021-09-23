@@ -43,12 +43,20 @@ Accounts
 <?= $this->section('script') ?>
 <script>
     //------- SweetAlert2 -------------
+    $(function() {
+        $('select').select2({});
+    });
+    //------- SweetAlert2 -------------
     const swal = Swal.mixin({
         confirmButtonColor: '#4C71DD',
         cancelButtonColor: '#898A99',
     })
     //------- DataTable -------------
     var table = $("#account").DataTable({
+        "lengthMenu": [
+            [3, 5, 10, -1],
+            [3, 5, 10, "All"]
+        ],
         ajax: {
             type: "GET",
             url: baseUrl + '/api/accounts',
@@ -120,7 +128,91 @@ Accounts
     }
 
     function edit(id) {
-        alert(id)
+        $.get(baseUrl + '/api/accounts/edit/' + id, (response) => {
+            render({
+                    title: 'Update',
+                    result: response.data
+                },
+                false
+            );
+        });
+    }
+
+    function render(data, option = true) {
+        $('#accountModal').modal('show');
+        !option ? renderUpdate(data) : renderSave(data);
+    }
+
+    function renderUpdate(data) {
+        $('.modal-title').text(data.title)
+        $('.btn-submit').text(data.title)
+        $('#input-account').val(data.result.account)
+        getTypeAccount()
+    }
+    stateSelect = true
+    function getTypeAccount() {
+        if (state) {
+            $.get(baseUrl + '/api/accounts/type', (response) => {
+                $.each(response.data, function(key, value) {
+                    $('select').append(`<option value="${value.id}">${value.type}</option>`);
+                    $("select").val(value.id).trigger('change');
+                });
+                stateSelect = false
+            });
+        }
     }
 </script>
+<?= $this->endSection() ?>
+
+<?= $this->section('modal') ?>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="accountModal" role="dialog" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="container">
+                        <div class="form-group row">
+                            <label for="input-type" class="col-4 col-form-label">Type</label>
+                            <div class="col-8">
+                                <select id="input-type" name="input-type" required="required" class="custom-select">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input-account" class="col-4 col-form-label">Account</label>
+                            <div class="col-8">
+                                <div class="input-group">
+                                    <input id="input-account" name="input-account" type="text" required="required" class="form-control">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-address-card"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button name="submit" type="submit" class="btn btn-primary btn-submit"></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 <?= $this->endSection() ?>

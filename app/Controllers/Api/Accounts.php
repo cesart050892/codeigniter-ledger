@@ -13,9 +13,9 @@ class Accounts extends ResourceController
 
     function index(){
         try {
-            $users = $this->model->getAll();
+            $res = $this->model->getAll();
             return $this->respond(array(
-                'data'    => $users
+                'data'    => $res
             ));
         } catch (\Throwable $th) {
             //throw $th;

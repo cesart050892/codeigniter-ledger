@@ -6,7 +6,9 @@ use CodeIgniter\Entity\Entity;
 
 class Taccount extends Entity
 {
-    protected $datamap = [];
+    protected $datamap = [
+        'type' => 'type-account'
+    ];
     protected $dates   = [
         'created_at',
         'updated_at',
