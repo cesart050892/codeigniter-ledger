@@ -147,11 +147,13 @@ Accounts
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
         $('#input-account').val(data.result.account)
+        $('#input-code').val(data.result.code)
         getTypeAccount()
     }
+
     stateSelect = true
     function getTypeAccount() {
-        if (state) {
+        if (stateSelect) {
             $.get(baseUrl + '/api/accounts/type', (response) => {
                 $.each(response.data, function(key, value) {
                     $('select').append(`<option value="${value.id}">${value.type}</option>`);
@@ -198,6 +200,19 @@ Accounts
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fa fa-address-card"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input-code" class="col-4 col-form-label">Code</label>
+                            <div class="col-8">
+                                <div class="input-group">
+                                    <input id="input-code" name="input-code" type="text" required="required" class="form-control">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-list-ol"></i>
                                         </div>
                                     </div>
                                 </div>
