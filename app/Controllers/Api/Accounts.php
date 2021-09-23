@@ -11,7 +11,8 @@ class Accounts extends ResourceController
         $this->model = model('App\Models\Accounts', false);
     }
 
-    function index(){
+    function index()
+    {
         try {
             $res = $this->model->getAll();
             return $this->respond(array(
@@ -23,7 +24,8 @@ class Accounts extends ResourceController
         }
     }
 
-    function delete($id = null){
+    function delete($id = null)
+    {
         try {
             if ($this->model->delete($id)) {
                 $this->model->purgeDeleted();
@@ -48,6 +50,37 @@ class Accounts extends ResourceController
                 ));
             } else {
                 return $this->failNotFound('can\'t be no found it');
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->failServerError();
+        }
+    }
+
+    public function create()
+    {
+        try {
+            //
+            if ($this->validate(array(
+                'input-code' => 'required',
+                'input-account' => 'required',
+                'input-type' => 'required'
+            ))) {
+                $data = [
+                    'code'      =>  $this->request->getPost('input-code'),
+                    'type_fk'   =>  $this->request->getPost('input-type'),
+                    'account'   =>  $this->request->getPost('input-account')
+                ];
+                $account = new \App\Entities\Accounts($data);
+                if ($this->model->save($account)) {
+                    return $this->respondCreated(array(
+                        'message' => 'created'
+                    ));
+                } else {
+                    return $this->failValidationErrors($this->model->validator->getErrors());
+                }
+            } else {
+                return $this->failValidationErrors($this->validator->getErrors());
             }
         } catch (\Throwable $th) {
             //throw $th;

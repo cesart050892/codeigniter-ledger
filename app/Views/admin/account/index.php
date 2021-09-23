@@ -12,7 +12,7 @@ Accounts
         <div class="card-header py-3 d-flex justify-content-between">
             <h6 class="m-0 mt-1 font-weight-bold text-primary">Accounts</h6>
             <button type="button" class="btn btn-primary btn-sm" id="btn-new-account">
-             <i class="fas fa-plus-square"></i>
+                <i class="fas fa-plus-square"></i>
                 Add New Account
             </button>
         </div>
@@ -130,6 +130,7 @@ Accounts
             }
         })
     }
+    stateFunction = true
 
     function edit(id) {
         $.get(baseUrl + '/api/accounts/edit/' + id, (response) => {
@@ -142,14 +143,38 @@ Accounts
         });
     }
 
-    $('#btn-new-account').click(function (e) { 
+    $('#btn-new-account').click(function(e) {
+        if (!stateFunction) stateFunction = true;
         e.preventDefault();
-        render(
-            {
-                title: 'Save',
-            },
-        )
+        render({
+            title: 'Save',
+        }, )
     });
+
+    $('form').submit(function(e) {
+        e.preventDefault();
+        data = $(this).serialize()
+        stateFunction ? ajaxSave(data) : ajaxUpdate(data);
+    });
+
+    function ajaxSave(data) {
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "/api/accounts",
+            data: data,
+            success: function(response) {
+                table.ajax.reload();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    }
+
     function render(data, option = true) {
         $('#accountModal').modal('show');
         !option ? renderUpdate(data) : renderSave(data);
@@ -162,7 +187,7 @@ Accounts
         $('#input-code').val(data.result.code)
         getTypeAccount()
     }
-    
+
     function renderSave(data) {
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
@@ -172,6 +197,7 @@ Accounts
     }
 
     stateSelect = true
+
     function getTypeAccount() {
         if (stateSelect) {
             $.get(baseUrl + '/api/accounts/type', (response) => {

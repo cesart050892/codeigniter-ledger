@@ -62,6 +62,7 @@ $routes->get('dashboard', 'Accounts::index');
 		$routes->get('/', 'Accounts::index');
 		$routes->get('delete/(:num)', 'Accounts::delete/$1');
 		$routes->get('edit/(:num)', 'Accounts::edit/$1');
+		$routes->post('/', 'Accounts::create');
 		$routes->group('type', function ($routes) {
 			$routes->get('/', 'Taccounts::index');
 			$routes->get('delete/(:num)', 'Taccounts::delete/$1');
