@@ -11,7 +11,7 @@ Accounts
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between">
             <h6 class="m-0 mt-1 font-weight-bold text-primary">Accounts</h6>
-            <button type="button" class="btn btn-primary btn-sm">
+            <button type="button" class="btn btn-primary btn-sm" id="btn-new-account">
              <i class="fas fa-plus-square"></i>
                 Add New Account
             </button>
@@ -142,6 +142,14 @@ Accounts
         });
     }
 
+    $('#btn-new-account').click(function (e) { 
+        e.preventDefault();
+        render(
+            {
+                title: 'Save',
+            },
+        )
+    });
     function render(data, option = true) {
         $('#accountModal').modal('show');
         !option ? renderUpdate(data) : renderSave(data);
@@ -152,6 +160,14 @@ Accounts
         $('.btn-submit').text(data.title)
         $('#input-account').val(data.result.account)
         $('#input-code').val(data.result.code)
+        getTypeAccount()
+    }
+    
+    function renderSave(data) {
+        $('.modal-title').text(data.title)
+        $('.btn-submit').text(data.title)
+        $('#input-account').val('')
+        $('#input-code').val('')
         getTypeAccount()
     }
 
