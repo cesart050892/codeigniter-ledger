@@ -73,10 +73,10 @@ Accounts
                 render: function(data) {
                     return `
           <div class='text-center'>
-          <button class='btn btn-warning btn-sm' onClick="fnEdit(${data.id})">
+          <button class='btn btn-warning btn-sm' onClick="edit(${data.id})">
           <i class="fas fa-edit"></i>
           </button>
-          <button class='btn btn-danger btn-sm' onClick="fnDelete(${data.id})">
+          <button class='btn btn-danger btn-sm' onClick="destroy(${data.id})">
           <i class="fas fa-trash"></i>
           </button>
           </div>`;
@@ -89,5 +89,32 @@ Accounts
         }, ],
         responsive: true,
     });
+
+    function destroy(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.get(baseUrl + '/api/account/delete' + id, () => {
+                    table.ajax.reload(null, false);
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                });
+            }
+        })
+    }
+
+    function edit(id) {
+        alert(id)
+    }
 </script>
 <?= $this->endSection() ?>
