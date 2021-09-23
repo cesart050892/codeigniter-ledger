@@ -55,7 +55,6 @@ Accounts
                 data: null,
                 title: "Code",
                 render: function(data) {
-                    console.log(data)
                     return `${data.general}.${data.code}`;
                 },
             },
@@ -90,6 +89,10 @@ Accounts
         responsive: true,
     });
 
+    setInterval(function() {
+        table.ajax.reload();
+    }, 1000);
+
     function destroy(id) {
         Swal.fire({
             title: 'Are you sure?',
@@ -101,7 +104,7 @@ Accounts
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $.get(baseUrl + '/api/account/delete' + id, () => {
+                $.get(baseUrl + '/api/accounts/delete/' + id, () => {
                     table.ajax.reload(null, false);
                     Swal.fire(
                         'Deleted!',

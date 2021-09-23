@@ -22,4 +22,20 @@ class Accounts extends ResourceController
             return $this->failServerError();
         }
     }
+
+    function delete($id = null){
+        try {
+            if ($this->model->delete($id)) {
+                $this->model->purgeDeleted();
+                return $this->respond(array(
+                    'message'    => 'deleted'
+                ));
+            } else {
+                return $this->fail($this->model->errors());
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->failServerError();
+        }
+    }
 }

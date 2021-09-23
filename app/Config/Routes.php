@@ -60,6 +60,7 @@ $routes->get('dashboard', 'Accounts::index');
 
 	$routes->group('accounts', function ($routes) {
 		$routes->get('/', 'Accounts::index');
+		$routes->get('delete/(:num)', 'Accounts::delete/$1');
 	});
  });
 
