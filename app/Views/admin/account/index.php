@@ -121,19 +121,21 @@ Accounts
             if (result.isConfirmed) {
                 $.get(baseUrl + '/api/accounts/delete/' + id, () => {
                     table.ajax.reload(null, false);
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
                 });
             }
         })
     }
-    stateFunction = true
-
+    window.stateFunction = true
     function edit(id) {
         $.get(baseUrl + '/api/accounts/edit/' + id, (response) => {
+            sessionStorage.setItem('idAccount', id)
             render({
                     title: 'Update',
                     result: response.data
@@ -144,7 +146,7 @@ Accounts
     }
 
     $('#btn-new-account').click(function(e) {
-        if (!stateFunction) stateFunction = true;
+        if (!window.stateFunction) window.stateFunction = true;
         e.preventDefault();
         render({
             title: 'Save',
@@ -164,12 +166,43 @@ Accounts
             data: data,
             success: function(response) {
                 table.ajax.reload();
+                $('#accountModal').modal('hide');
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: 'Your work has been saved',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000
+                })
+            },
+            error: function(err, status, thrown){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Error when saving, check your data.',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
+        });
+    }
+
+    function ajaxUpdate(data) {
+        data = `${data}&id=${sessionStorage.getItem('idAccount')}`
+        sessionStorage.removeItem('idAccount')
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "/api/accounts/update",
+            data: data,
+            success: function(response) {
+                table.ajax.reload();
+                $('#accountModal').modal('hide');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been updated',
+                    showConfirmButton: false,
+                    timer: 1000
                 })
             }
         });

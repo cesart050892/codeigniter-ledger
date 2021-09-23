@@ -63,7 +63,7 @@ class Accounts extends ResourceController
             //
             if ($this->validate(array(
                 'input-code' => 'required',
-                'input-account' => 'required',
+                'input-account' => 'required|is_unique[accounts.account]',
                 'input-type' => 'required'
             ))) {
                 $data = [

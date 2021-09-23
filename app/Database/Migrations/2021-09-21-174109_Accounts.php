@@ -36,6 +36,7 @@ class Accounts extends Migration
 		$this->forge->addField("updated_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addField("deleted_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addForeignKey('type_fk', 'taccount', 'id', 'cascade', 'cascade');
+		$this->forge->addUniqueKey(['code', 'type_fk']);
 		$this->forge->createTable($this->name);
 	}
 
