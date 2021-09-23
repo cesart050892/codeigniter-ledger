@@ -9,8 +9,9 @@ Accounts
 <div class="container-fluid">
     <!-- Basic Card Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 d-flex justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Accounts</h6>
+            <button type="button" class="btn btn-primary m-0 font-weight-bold">New <i class="fas fa-plus-square"></i></button>
         </div>
         <div class="card-body">
             <table id="account" class="table table-hover table-bordered table-striped display nowrap" style="width:100%">
