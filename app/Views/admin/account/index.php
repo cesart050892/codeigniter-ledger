@@ -46,9 +46,11 @@ Accounts
 
 <?= $this->section('script') ?>
 <script>
-    //------- SweetAlert2 -------------
+    //------- Select2 -------------
     $(function() {
         $('#input-type').select2({});
+        getSelect();
+
     });
     //------- SweetAlert2 -------------
     const swal = Swal.mixin({
@@ -132,7 +134,18 @@ Accounts
             }
         })
     }
+
+    function getSelect() {
+        $.get(baseUrl + '/api/accounts/type', (response) => {
+            $.each(response.data, function(key, value) {
+                $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
+            });
+            window.stateSelect = false
+        });
+    }
+
     window.stateFunction = true
+
     function edit(id) {
         $.get(baseUrl + '/api/accounts/edit/' + id, (response) => {
             sessionStorage.setItem('idAccount', id)
@@ -175,7 +188,7 @@ Accounts
                     timer: 1000
                 })
             },
-            error: function(err, status, thrown){
+            error: function(err, status, thrown) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
@@ -216,31 +229,17 @@ Accounts
     function renderUpdate(data) {
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
+        $('#input-type').val(data.result.foreign).trigger('change');
         $('#input-account').val(data.result.account)
         $('#input-code').val(data.result.code)
-        getTypeAccount()
     }
 
     function renderSave(data) {
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
+        $('#input-type').val(null).trigger('change');
         $('#input-account').val('')
         $('#input-code').val('')
-        getTypeAccount()
-    }
-
-    stateSelect = true
-
-    function getTypeAccount() {
-        if (stateSelect) {
-            $.get(baseUrl + '/api/accounts/type', (response) => {
-                $.each(response.data, function(key, value) {
-                    $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
-                    $('#input-type').val(value.id).trigger('change');
-                });
-                stateSelect = false
-            });
-        }
     }
 </script>
 <?= $this->endSection() ?>
