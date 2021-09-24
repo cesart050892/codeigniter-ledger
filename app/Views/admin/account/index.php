@@ -247,10 +247,6 @@ Accounts
 <?= $this->endSection() ?>
 
 <?= $this->section('modal') ?>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="accountModal" role="dialog" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
