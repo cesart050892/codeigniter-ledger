@@ -48,7 +48,9 @@ Accounts
 <script>
     //------- Select2 -------------
     $(function() {
-        $('#input-type').select2({});
+        $('#input-type').select2({
+            theme: 'bootstrap4'
+        });
         getSelect();
 
     });
@@ -249,7 +251,7 @@ Accounts
 <?= $this->section('modal') ?>
 
 <!-- Modal -->
-<div class="modal fade" id="accountModal" role="dialog" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal fade" id="accountModal" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
