@@ -108,9 +108,9 @@ Accounts
         responsive: true,
     });
 
-/*     setInterval(function() {
+    setInterval(function() {
         table.ajax.reload();
-    }, 1000); */
+    }, 1000);
 
     function destroy(id) {
         swal.fire({
@@ -206,7 +206,7 @@ Accounts
         data = `${data}&id=${id}`
         $.ajax({
             type: "POST",
-            url: baseUrl + "/api/accounts/update/"+id,
+            url: baseUrl + "/api/accounts/update/" + id,
             data: data,
             success: function(response) {
                 sessionStorage.removeItem('idAccount')
