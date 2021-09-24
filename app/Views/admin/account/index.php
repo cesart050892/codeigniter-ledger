@@ -126,9 +126,9 @@ Accounts
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your work has been saved',
+                        title: 'Your work has been deleted',
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 2000
                     })
                 });
             }
@@ -186,7 +186,7 @@ Accounts
                     icon: 'success',
                     title: 'Your work has been saved',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 2000
                 })
             },
             error: function(err, status, thrown) {
@@ -195,7 +195,7 @@ Accounts
                     icon: 'error',
                     title: 'Error when saving, check your data.',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 3000
                 })
             }
         });
@@ -217,7 +217,7 @@ Accounts
                     icon: 'success',
                     title: 'Your work has been updated',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 2000
                 })
             }
         });

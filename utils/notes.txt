@@ -1,0 +1,15 @@
+orden n° 1 (actual) de manejo de frontend con js jquery Ajax
+
+configuracion de plugins
+(ejecucion de funcion) rellenar select
+metodo Ajax delete
+actualizacion ajax de la tabla
+(creacion) funcion rellenar select
+metodo Ajax edit
+manejo de boton "nuevo"
+manejo de submit
+metodo Ajax save 
+metodo Ajax update
+manejo de renders (hacer la logica)
+(funcion) renderizado update
+(funcion) renderizado save
