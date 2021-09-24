@@ -62,7 +62,7 @@ class Accounts extends ResourceController
         try {
             //
             if ($this->validate(array(
-                'input-code' => 'required',
+                'input-code' => 'required|numeric',
                 'input-account' => 'required|is_unique[accounts.account]',
                 'input-type' => 'required'
             ))) {
@@ -93,7 +93,7 @@ class Accounts extends ResourceController
         try {
             //
             if ($this->validate(array(
-                'input-code' => 'required',
+                'input-code' => 'required|numeric',
                 'input-account' => 'required|is_unique[accounts.account,id,{id}]',
                 'input-type' => 'required'
             ))) {
