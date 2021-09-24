@@ -46,53 +46,55 @@ Accounts
 
 <?= $this->section('script') ?>
 <script>
-    //------- Select2 -------------
     $(function() {
+        setPlugins();
+        getSelect();
+    });
+
+    function setPlugins() {
+        //------- Select2 -------------
         $('#input-type').select2({
             theme: 'bootstrap4',
             dropdownParent: $("#accountModal")
         });
-        getSelect();
-
-    });
-    //------- SweetAlert2 -------------
-    const swal = Swal.mixin({
-        confirmButtonColor: '#4C71DD',
-        cancelButtonColor: '#898A99',
-    })
-    //------- DataTable -------------
-    var table = $("#account").DataTable({
-        "lengthMenu": [
-            [3, 5, 10, -1],
-            [3, 5, 10, "All"]
-        ],
-        ajax: {
-            type: "GET",
-            url: baseUrl + '/api/accounts',
-            dataSrc: function(response) {
-                return response.data;
-            },
-        },
-        columns: [{
-                data: null,
-                title: "Code",
-                render: function(data) {
-                    return `${data.general}.${data.code}`;
+        //------- SweetAlert2 -------------
+        const swal = Swal.mixin({
+            confirmButtonColor: '#4C71DD',
+            cancelButtonColor: '#898A99',
+        })
+        //------- DataTable -------------
+        var table = $("#account").DataTable({
+            "lengthMenu": [
+                [3, 5, 10, -1],
+                [3, 5, 10, "All"]
+            ],
+            ajax: {
+                type: "GET",
+                url: baseUrl + '/api/accounts',
+                dataSrc: function(response) {
+                    return response.data;
                 },
             },
-            {
-                data: "root",
-                title: "Type"
-            },
-            {
-                data: "account",
-                title: "Account"
-            },
-            {
-                data: null,
-                title: "Actions",
-                render: function(data) {
-                    return `
+            columns: [{
+                    data: null,
+                    title: "Code",
+                    render: function(data) {
+                        return `${data.general}.${data.code}`;
+                    },
+                },
+                {
+                    data: "root",
+                    title: "Type"
+                },
+                {
+                    data: "account",
+                    title: "Account"
+                },
+                {
+                    data: null,
+                    title: "Actions",
+                    render: function(data) {
+                        return `
           <div class='text-center'>
           <button class='btn btn-warning btn-sm' onClick="edit(${data.id})">
           <i class="fas fa-edit"></i>
@@ -101,19 +103,20 @@ Accounts
           <i class="fas fa-trash"></i>
           </button>
           </div>`;
+                    },
                 },
-            },
-        ],
-        columnDefs: [{
-            className: "text-center",
-            targets: "_all",
-        }, ],
-        responsive: true,
-    });
+            ],
+            columnDefs: [{
+                className: "text-center",
+                targets: "_all",
+            }, ],
+            responsive: true,
+        });
 
-    setInterval(function() {
-        table.ajax.reload();
-    }, 1000);
+        setInterval(function() {
+            table.ajax.reload();
+        }, 1000);
+    }
 
     function destroy(id) {
         swal.fire({
