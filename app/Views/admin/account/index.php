@@ -108,9 +108,9 @@ Accounts
         responsive: true,
     });
 
-    setInterval(function() {
+/*     setInterval(function() {
         table.ajax.reload();
-    }, 1000);
+    }, 1000); */
 
     function destroy(id) {
         swal.fire({
@@ -147,6 +147,7 @@ Accounts
     window.stateFunction = true
 
     function edit(id) {
+        window.stateFunction = false
         $.get(baseUrl + '/api/accounts/edit/' + id, (response) => {
             sessionStorage.setItem('idAccount', id)
             render({
@@ -201,13 +202,14 @@ Accounts
     }
 
     function ajaxUpdate(data) {
-        data = `${data}&id=${sessionStorage.getItem('idAccount')}`
-        sessionStorage.removeItem('idAccount')
+        id = sessionStorage.getItem('idAccount')
+        data = `${data}&id=${id}`
         $.ajax({
             type: "POST",
-            url: baseUrl + "/api/accounts/update",
+            url: baseUrl + "/api/accounts/update/"+id,
             data: data,
             success: function(response) {
+                sessionStorage.removeItem('idAccount')
                 table.ajax.reload();
                 $('#accountModal').modal('hide');
                 Swal.fire({

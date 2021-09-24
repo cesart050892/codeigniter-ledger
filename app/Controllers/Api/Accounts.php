@@ -87,4 +87,36 @@ class Accounts extends ResourceController
             return $this->failServerError();
         }
     }
+
+    public function update($id = null)
+    {
+        try {
+            //
+            if ($this->validate(array(
+                'input-code' => 'required',
+                'input-account' => 'required|is_unique[accounts.account,id,{id}]',
+                'input-type' => 'required'
+            ))) {
+                $data = [
+                    'id'      =>  $this->request->getPost('id'),
+                    'code'      =>  $this->request->getPost('input-code'),
+                    'type_fk'   =>  $this->request->getPost('input-type'),
+                    'account'   =>  $this->request->getPost('input-account')
+                ];
+                $account = new \App\Entities\Accounts($data);
+                if ($this->model->save($account)) {
+                    return $this->respondUpdated(array(
+                        'message' => 'updated'
+                    ));
+                } else {
+                    return $this->failValidationErrors($this->model->validator->getErrors());
+                }
+            } else {
+                return $this->failValidationErrors($this->validator->getErrors());
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->failServerError();
+        }
+    }
 }
