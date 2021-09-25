@@ -40,7 +40,8 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'Login::index', ['filter' => 'no-auth']);
 $routes->get('dashboard', 'Dashboard::index');
-$routes->get('dashboard', 'Accounts::index');
+$routes->get('accounts', 'Accounts::index');
+$routes->get('transactions', 'Transactions::index');
 
 /*
  * --------------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?= $this->extend('templates/main') ?>
 
 <?= $this->section('title') ?>
-Transactions
+transactions
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -10,10 +10,10 @@ Transactions
     <!-- Basic Card Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between">
-            <h6 class="m-0 mt-1 font-weight-bold text-primary">Transaction</h6>
+            <h6 class="m-0 mt-1 font-weight-bold text-primary">transactions</h6>
             <button type="button" class="btn btn-primary btn-sm" id="btn-new-transaction">
                 <i class="fas fa-plus-square"></i>
-                Add New Transaction
+                Add New transaction
             </button>
         </div>
         <div class="card-body">
@@ -46,48 +46,65 @@ Transactions
 
 <?= $this->section('script') ?>
 <script>
-    //------- SweetAlert2 -------------
     $(function() {
-        $('#input-type').select2({});
+        getSelect();
     });
-    //------- SweetAlert2 -------------
-    const swal = Swal.mixin({
-        confirmButtonColor: '#4C71DD',
-        cancelButtonColor: '#898A99',
-    })
-    //------- DataTable -------------
-    var table = $("#transaction").DataTable({
-        "lengthMenu": [
-            [3, 5, 10, -1],
-            [3, 5, 10, "All"]
-        ],
-        ajax: {
-            type: "GET",
-            url: baseUrl + '/api/transactions',
-            dataSrc: function(response) {
-                return response.data;
-            },
-        },
-        columns: [{
-                data: null,
-                title: "Code",
-                render: function(data) {
-                    return `${data.general}.${data.code}`;
+
+        //------- Select2 -------------
+        $('#input-type').select2({
+            theme: 'bootstrap4',
+            dropdownParent: $("#transactionModal")
+        });
+        //------- SweetAlert2 -------------
+        const swal = Swal.mixin({
+            confirmButtonColor: '#4C71DD',
+            cancelButtonColor: '#898A99',
+        })
+        //------- DataTable -------------
+        var table = $("#transaction").DataTable({
+            "lengthMenu": [
+                [3, 5, 10, -1],
+                [3, 5, 10, "All"]
+            ],
+            ajax: {
+                type: "GET",
+                url: baseUrl + '/api/transactions',
+                dataSrc: function(response) {
+                    return response.data;
                 },
             },
-            {
-                data: "root",
-                title: "Type"
-            },
-            {
-                data: "Transaction",
-                title: "transaction"
-            },
-            {
-                data: null,
-                title: "Actions",
-                render: function(data) {
-                    return `
+            columns: [{
+                    data: null,
+                    title: "Transaction",
+                    render: function(data) {
+                        return `${data.reference}`;
+                    },
+                },
+                {
+                    data: "general",
+                    title: "General"
+                },
+                {
+                    data: "account",
+                    title: "Account"
+                },
+                {
+                    data: "type",
+                    title: "Type"
+                },
+                {
+                    data: "quantity",
+                    title: "Quantity"
+                },
+                {
+                    data: "description",
+                    title: "Description"
+                },
+                {
+                    data: null,
+                    title: "Actions",
+                    render: function(data) {
+                        return `
           <div class='text-center'>
           <button class='btn btn-warning btn-sm' onClick="edit(${data.id})">
           <i class="fas fa-edit"></i>
@@ -96,19 +113,19 @@ Transactions
           <i class="fas fa-trash"></i>
           </button>
           </div>`;
+                    },
                 },
-            },
-        ],
-        columnDefs: [{
-            className: "text-center",
-            targets: "_all",
-        }, ],
-        responsive: true,
-    });
+            ],
+            columnDefs: [{
+                className: "text-center",
+                targets: "_all",
+            }, ],
+            responsive: true,
+        });
 
-    setInterval(function() {
-        table.ajax.reload();
-    }, 1000);
+        setInterval(function() {
+            table.ajax.reload();
+        }, 1000);
 
     function destroy(id) {
         swal.fire({
@@ -124,16 +141,28 @@ Transactions
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your work has been saved',
+                        title: 'Your work has been deleted',
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 2000
                     })
                 });
             }
         })
     }
+
+    function getSelect() {
+        $.get(baseUrl + '/api/transactions/type', (response) => {
+            $.each(response.data, function(key, value) {
+                $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
+            });
+            window.stateSelect = false
+        });
+    }
+
     window.stateFunction = true
+
     function edit(id) {
+        window.stateFunction = false
         $.get(baseUrl + '/api/transactions/edit/' + id, (response) => {
             sessionStorage.setItem('idtransaction', id)
             render({
@@ -172,29 +201,30 @@ Transactions
                     icon: 'success',
                     title: 'Your work has been saved',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 2000
                 })
             },
-            error: function(err, status, thrown){
+            error: function(err, status, thrown) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
                     title: 'Error when saving, check your data.',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 3000
                 })
             }
         });
     }
 
     function ajaxUpdate(data) {
-        data = `${data}&id=${sessionStorage.getItem('idtransaction')}`
-        sessionStorage.removeItem('idtransaction')
+        id = sessionStorage.getItem('idtransaction')
+        data = `${data}&id=${id}`
         $.ajax({
             type: "POST",
-            url: baseUrl + "/api/transactions/update",
+            url: baseUrl + "/api/transactions/update/" + id,
             data: data,
             success: function(response) {
+                sessionStorage.removeItem('idtransaction')
                 table.ajax.reload();
                 $('#transactionModal').modal('hide');
                 Swal.fire({
@@ -202,7 +232,7 @@ Transactions
                     icon: 'success',
                     title: 'Your work has been updated',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 2000
                 })
             }
         });
@@ -216,43 +246,25 @@ Transactions
     function renderUpdate(data) {
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
+        $('#input-type').val(data.result.foreign).trigger('change');
         $('#input-transaction').val(data.result.transaction)
         $('#input-code').val(data.result.code)
-        getTypetransaction()
     }
 
     function renderSave(data) {
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
+        $('#input-type').val(null).trigger('change');
         $('#input-transaction').val('')
         $('#input-code').val('')
-        getTypetransaction()
-    }
-
-    stateSelect = true
-
-    function getTypetransaction() {
-        if (stateSelect) {
-            $.get(baseUrl + '/api/transactions/type', (response) => {
-                $.each(response.data, function(key, value) {
-                    $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
-                    $('#input-type').val(value.id).trigger('change');
-                });
-                stateSelect = false
-            });
-        }
     }
 </script>
 <?= $this->endSection() ?>
 
 <?= $this->section('modal') ?>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Launch demo modal
-</button>
 
 <!-- Modal -->
-<div class="modal fade" id="transactionModal" role="dialog" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -262,17 +274,17 @@ Transactions
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form autocomplete="off">
                     <div class="container">
                         <div class="form-group row">
-                            <label for="input-account" class="col-4 col-form-label">account</label>
+                            <label for="input-type" class="col-4 col-form-label">Type</label>
                             <div class="col-8">
-                                <select id="input-account" name="input-account" required="required" class="custom-select">
+                                <select id="input-type" name="input-type" required="required" class="custom-select">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input-transaction" class="col-4 col-form-label">Transaction</label>
+                            <label for="input-transaction" class="col-4 col-form-label">transaction</label>
                             <div class="col-8">
                                 <div class="input-group">
                                     <input id="input-transaction" name="input-transaction" type="text" required="required" class="form-control">
@@ -285,10 +297,10 @@ Transactions
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input-quantity" class="col-4 col-form-label">Quantity</label>
+                            <label for="input-code" class="col-4 col-form-label">Code</label>
                             <div class="col-8">
                                 <div class="input-group">
-                                    <input id="input-quantity" name="input-quantity" type="text" required="required" class="form-control">
+                                    <input id="input-code" name="input-code" type="text" required="required" class="form-control">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fas fa-list-ol"></i>
