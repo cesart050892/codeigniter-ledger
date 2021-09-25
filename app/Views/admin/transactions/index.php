@@ -78,7 +78,7 @@ transactions
                     data: null,
                     title: "Date",
                     render: function(data) {
-                        return `${data.created_at.date}`;
+                        return `${moment(data.created_at.date).fromNow()}`;
                     },
                 },
                 {
