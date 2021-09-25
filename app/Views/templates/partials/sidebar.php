@@ -24,23 +24,44 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Interface
+        Administration
     </div>
+
+    <!-- Nav Item - Accounts -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('accounts') ?>">
+            <i class="fas fa-archive"></i>
+            <span>Accounts</span></a>
+    </li>
+
+    <!-- Nav Item - Transactions -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('transactions') ?>">
+            <i class="fas fa-archive"></i>
+            <span>Transactions</span></a>
+    </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
+            <span>Reports</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+                <h6 class="collapse-header">Transactions:</h6>
+                <a class="collapse-item" href="<?= base_url('reports/transactions/credits') ?>">Credit</a>
+                <a class="collapse-item" href="<?= base_url('report/transactions/debit') ?>">Debit</a>
             </div>
         </div>
     </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Addons
+    </div>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
@@ -58,14 +79,6 @@
             </div>
         </div>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -85,20 +98,6 @@
                 <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
         </div>
-    </li>
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('accounts') ?>">
-            <i class="fas fa-archive"></i>
-            <span>Accounts</span></a>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
     </li>
 
     <!-- Divider -->
