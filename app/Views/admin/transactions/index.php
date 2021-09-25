@@ -73,17 +73,22 @@ transactions
                     return response.data;
                 },
             },
-            columns: [{
+            columns: [
+                {
+                    data: "date",
+                    title: "Date"
+                },
+                {
                     data: null,
                     title: "Transaction",
                     render: function(data) {
                         return `${data.reference}`;
                     },
                 },
-                {
+/*                 {
                     data: "general",
-                    title: "General"
-                },
+                    title: "Nature"
+                }, */
                 {
                     data: "account",
                     title: "Account"
