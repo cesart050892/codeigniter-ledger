@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Ttransaction extends Model
+class Operator extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'ttransaction';
+    protected $table                = 'operator';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
-    protected $returnType           = \App\Entities\Ttransaction::class;
+    protected $returnType           = \App\Entities\Operator::class;
     protected $useSoftDeletes       = true;
     protected $protectFields        = true;
-    protected $allowedFields        = ['type-transaction'];
+    protected $allowedFields        = ['operator'];
 
     // Dates
     protected $useTimestamps        = true;

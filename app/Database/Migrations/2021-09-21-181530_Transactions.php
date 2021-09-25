@@ -36,7 +36,7 @@ class Transactions extends Migration
 				'unsigned'       => true,
 				'constraint' => '11',
 			],
-			'type_fk'	=> [
+			'operator_fk'	=> [
 				'type'       => 'BIGINT',
 				'unsigned'       => true,
 				'constraint' => 11,
@@ -47,7 +47,7 @@ class Transactions extends Migration
 		$this->forge->addField("updated_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addField("deleted_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addForeignKey('account_fk', 'accounts', 'id', 'cascade', 'cascade');
-		$this->forge->addForeignKey('type_fk', 'ttransaction', 'id', 'cascade', 'cascade');
+		$this->forge->addForeignKey('operator_fk', 'operator', 'id', 'cascade', 'cascade');
 		$this->forge->createTable($this->name);
 	}
 	public function down()

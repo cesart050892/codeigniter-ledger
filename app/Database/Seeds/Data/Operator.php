@@ -4,19 +4,19 @@ namespace App\Database\Seeds\Data;
 
 use CodeIgniter\Database\Seeder;
 
-class Ttransaction extends Seeder
+class Operator extends Seeder
 {
     public function run()
     {
         //
         //
-        $model = model('App\Models\Ttransaction', false);
+        $model = model('App\Models\Operator', false);
         $data = [
-            ['type-transaction' => 'debe'],
-            ['type-transaction' => 'haber']
+            ['operator' => 'Debe'],
+            ['operator' => 'Haber']
         ];
         foreach ($data as $key) {
-            $user = new \App\Entities\Ttransaction($key);
+            $user = new \App\Entities\Operator($key);
             $model->insert($user);
         }
     }

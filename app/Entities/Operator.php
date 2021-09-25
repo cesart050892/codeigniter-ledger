@@ -4,11 +4,9 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
-class Taccount extends Entity
+class Operator extends Entity
 {
-    protected $datamap = [
-        'type' => 'type-account'
-    ];
+    protected $datamap = [];
     protected $dates   = [
         'created_at',
         'updated_at',

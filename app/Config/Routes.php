@@ -76,6 +76,11 @@ $routes->get('transactions', 'Transactions::index');
 		$routes->get('/', 'Transactions::index');
 		$routes->get('delete/(:num)', 'Transactions::delete/$1');
 		$routes->get('edit/(:num)', 'Transactions::edit/$1');
+		$routes->group('type', function ($routes) {
+			$routes->get('/', 'Ttransactions::index');
+			$routes->get('delete/(:num)', 'Ttransactions::delete/$1');
+			$routes->get('edit/(:num)', 'Ttransactions::edit/$1');
+		});
 	});
 
 

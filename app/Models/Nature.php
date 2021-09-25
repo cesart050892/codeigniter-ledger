@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Taccount extends Model
+class Nature extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'taccount';
+    protected $table                = 'nature';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
-    protected $returnType           = \App\Entities\Taccount::class;
+    protected $returnType           = \App\Entities\Nature::class;
     protected $useSoftDeletes       = true;
     protected $protectFields        = true;
-    protected $allowedFields        = ['code', 'type-account'];
+    protected $allowedFields        = ['code', 'nature'];
 
     // Dates
     protected $useTimestamps        = true;

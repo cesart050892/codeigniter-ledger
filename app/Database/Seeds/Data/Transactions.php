@@ -17,7 +17,7 @@ class Transactions extends Seeder
                 'quantity'    => '5000',
                 'description' => 'Inversion inicial',
                 'account_fk' => 1,
-                'type_fk' => 1
+                'operator_fk' => 1
             ],
         ];
         foreach ($data as $key) {

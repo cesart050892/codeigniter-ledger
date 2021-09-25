@@ -4,29 +4,29 @@ namespace App\Database\Seeds\Data;
 
 use CodeIgniter\Database\Seeder;
 
-class Taccount extends Seeder
+class Nature extends Seeder
 {
     public function run()
     {
         //
         //
-        $model = model('App\Models\Taccount', false);
+        $model = model('App\Models\Nature', false);
         $data = [
             [
-                'type-account' => 'Activo',
+                'nature' => 'Activo',
                 'code' => 1
             ],
             [
-                'type-account' => 'Pasivo',
+                'nature' => 'Pasivo',
                 'code' => 2
             ],
             [
-                'type-account' => 'Capital',
+                'nature' => 'Capital',
                 'code' => 3
             ]
         ];
         foreach ($data as $key) {
-            $user = new \App\Entities\Taccount($key);
+            $user = new \App\Entities\Nature($key);
             $model->insert($user);
         }
     }

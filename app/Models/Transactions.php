@@ -14,7 +14,7 @@ class Transactions extends Model
     protected $returnType           = \App\Entities\Transactions::class;
     protected $useSoftDeletes       = true;
     protected $protectFields        = true;
-    protected $allowedFields        = ['transaction', 'quantity', 'description', 'type_fk', 'account_fk'];
+    protected $allowedFields        = ['transaction', 'quantity', 'description', 'operator_fk', 'account_fk'];
 
     // Dates
     protected $useTimestamps        = true;

@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class TypeAcc extends Migration
+class Nature extends Migration
 {
-	protected $name = 'taccount';
+	protected $name = 'nature';
 
 	public function up()
 	{
@@ -17,7 +17,7 @@ class TypeAcc extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'type-account'	=> [
+			'nature'	=> [
 				'type'       => 'VARCHAR',
 				'constraint' => '75',
 			],

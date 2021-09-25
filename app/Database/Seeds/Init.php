@@ -11,8 +11,8 @@ class Init extends Seeder
 		//
 		// With this slash \ works on windows
 		// And this command php spark db:seed \API\Database\Seeds\Init
-		$this->call('App\Database\Seeds\Data\Ttransaction');
-		$this->call('App\Database\Seeds\Data\Taccount');
+		$this->call('App\Database\Seeds\Data\Operator');
+		$this->call('App\Database\Seeds\Data\Nature');
 		$this->call('App\Database\Seeds\Data\Accounts');
 		$this->call('App\Database\Seeds\Data\Transactions');
 		$this->call('App\Database\Seeds\Data\Users');

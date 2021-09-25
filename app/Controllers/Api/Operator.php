@@ -4,11 +4,11 @@ namespace App\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
 
-class TAccounts extends ResourceController
+class Operator extends ResourceController
 {
     public function __construct()
     {
-        $this->model = model('App\Models\Taccount', false);
+        $this->model = model('App\Models\Operator', false);
     }
 
     function index(){

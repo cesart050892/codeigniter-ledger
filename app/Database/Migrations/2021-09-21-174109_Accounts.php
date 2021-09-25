@@ -25,7 +25,7 @@ class Accounts extends Migration
 				'type'       => 'VARCHAR',
 				'constraint' => '75',
 			],
-			'type_fk'	=> [
+			'nature_fk'	=> [
 				'type'       => 'BIGINT',
 				'unsigned'       => true,
 				'constraint' => 11,
@@ -35,8 +35,8 @@ class Accounts extends Migration
 		$this->forge->addField("created_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addField("updated_at DATETIME NULL DEFAULT NULL");
 		$this->forge->addField("deleted_at DATETIME NULL DEFAULT NULL");
-		$this->forge->addForeignKey('type_fk', 'taccount', 'id', 'cascade', 'cascade');
-		$this->forge->addUniqueKey(['code', 'type_fk']);
+		$this->forge->addForeignKey('nature_fk', 'nature', 'id', 'cascade', 'cascade');
+		$this->forge->addUniqueKey(['code', 'nature_fk']);
 		$this->forge->createTable($this->name);
 	}
 

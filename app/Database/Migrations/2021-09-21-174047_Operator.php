@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class TypeTran extends Migration
+class Operator extends Migration
 {
-	protected $name = 'ttransaction';
+	protected $name = 'operator';
 
 	public function up()
 	{
@@ -17,7 +17,7 @@ class TypeTran extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'type-transaction'	=> [
+			'operator'	=> [
 				'type'       => 'VARCHAR',
 				'constraint' => '75',
 			]

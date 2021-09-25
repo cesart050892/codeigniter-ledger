@@ -15,12 +15,12 @@ class Accounts extends Seeder
             [
                 'account' => 'Caja',
                 'code' => 1,
-                'type_fk' => 1
+                'nature_fk' => 1
             ],
             [
                 'account' => 'Proveedores',
                 'code' => 1,
-                'type_fk' => 2
+                'nature_fk' => 2
             ],
         ];
         foreach ($data as $key) {

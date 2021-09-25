@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
-class Ttransaction extends Entity
+class Nature extends Entity
 {
     protected $datamap = [];
     protected $dates   = [

@@ -14,7 +14,7 @@ class Accounts extends Model
     protected $returnType           = \App\Entities\Accounts::class;
     protected $useSoftDeletes       = true;
     protected $protectFields        = true;
-    protected $allowedFields        = ['account', 'code', 'type_fk'];
+    protected $allowedFields        = ['account', 'code', 'nature_fk'];
 
     // Dates
     protected $useTimestamps        = true;
