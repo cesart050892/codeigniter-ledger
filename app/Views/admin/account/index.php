@@ -47,11 +47,9 @@ Accounts
 <?= $this->section('script') ?>
 <script>
     $(function() {
-        setPlugins();
         getSelect();
     });
 
-    function setPlugins() {
         //------- Select2 -------------
         $('#input-type').select2({
             theme: 'bootstrap4',
@@ -116,7 +114,6 @@ Accounts
         setInterval(function() {
             table.ajax.reload();
         }, 1000);
-    }
 
     function destroy(id) {
         swal.fire({
@@ -265,7 +262,7 @@ Accounts
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form autocomplete="off">
                     <div class="container">
                         <div class="form-group row">
                             <label for="input-type" class="col-4 col-form-label">Type</label>
