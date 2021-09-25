@@ -71,6 +71,12 @@ $routes->get('dashboard', 'Accounts::index');
 		});
 	});
 
+	$routes->group('transactions', function ($routes) {
+		$routes->get('/', 'Transactions::index');
+		$routes->get('delete/(:num)', 'Transactions::delete/$1');
+		$routes->get('edit/(:num)', 'Transactions::edit/$1');
+	});
+
 
  });
 

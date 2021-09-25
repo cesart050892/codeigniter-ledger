@@ -39,4 +39,43 @@ class Transactions extends Model
     protected $afterFind            = [];
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
+
+    //functions
+
+    public function getAll()
+    {
+        return $this->select('
+        transactions.created_at AS date,
+        transactions.`transaction` AS reference,
+        taccount.`type-account` AS general,
+        accounts.account,
+        ttransaction.`type-transaction` AS type,
+        transactions.quantity,
+        transactions.description 
+    ')
+            ->join('ttransaction', 'transactions.type_fk = ttransaction.id')
+            ->join('accounts', 'transactions.account_fk = accounts.id')
+            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->findAll();
+    }
+
+    public function getOne($id)
+    {
+        return $this->select('
+        transactions.created_at AS date,
+        transactions.`transaction` AS reference,
+        taccount.`type-account` AS general,
+        accounts.account,
+        ttransaction.`type-transaction` AS type,
+        transactions.quantity,
+        transactions.description,
+        transactions.account_fk,
+        transactions.type_fk 
+    ')
+            ->join('ttransaction', 'transactions.type_fk = ttransaction.id')
+            ->join('accounts', 'transactions.account_fk = accounts.id')
+            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->where('transactions.id', $id)
+            ->first();
+    }
 }
