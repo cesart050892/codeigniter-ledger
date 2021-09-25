@@ -81,8 +81,8 @@ Accounts
                     },
                 },
                 {
-                    data: "root",
-                    title: "Type"
+                    data: "nature",
+                    title: "Nature"
                 },
                 {
                     data: "account",

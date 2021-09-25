@@ -75,14 +75,17 @@ transactions
             },
             columns: [
                 {
-                    data: "date",
-                    title: "Date"
+                    data: null,
+                    title: "Date",
+                    render: function(data) {
+                        return `${data.created_at.date}`;
+                    },
                 },
                 {
                     data: null,
                     title: "Transaction",
                     render: function(data) {
-                        return `${data.reference}`;
+                        return `${data.transaction}`;
                     },
                 },
 /*                 {
@@ -94,8 +97,8 @@ transactions
                     title: "Account"
                 },
                 {
-                    data: "type",
-                    title: "Type"
+                    data: "operator",
+                    title: "Operator"
                 },
                 {
                     data: "quantity",

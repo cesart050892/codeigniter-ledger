@@ -45,28 +45,28 @@ class Accounts extends Model
     public function getAll()
     {
         return $this->select('
-        accounts.id, 
-        taccount.`type-account` AS root, 
-        taccount.`code` AS general, 
-        accounts.`code`, 
-        accounts.account, 
-        accounts.type_fk AS `foreign`
+        accounts.id,
+        nature.nature,
+        nature.`code` AS general,
+        accounts.`code`,
+        accounts.account,
+        accounts.nature_fk 
     ')
-            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->join('nature', 'accounts.nature_fk = nature.id')
             ->findAll();
     }
 
     public function getOne($id)
     {
         return $this->select('
-        accounts.id, 
-        taccount.`type-account` AS root, 
-        taccount.`code` AS general, 
-        accounts.`code`, 
-        accounts.account, 
-        accounts.type_fk AS `foreign`
+        accounts.id,
+        nature.nature,
+        nature.`code` AS general,
+        accounts.`code`,
+        accounts.account,
+        accounts.nature_fk 
     ')
-            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->join('nature', 'accounts.nature_fk = nature.id')
             ->where('accounts.id', $id)
             ->first();
     }

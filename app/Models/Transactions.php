@@ -45,36 +45,36 @@ class Transactions extends Model
     public function getAll()
     {
         return $this->select('
-        transactions.created_at AS date,
-        transactions.`transaction` AS reference,
-        taccount.`type-account` AS general,
-        accounts.account,
-        ttransaction.`type-transaction` AS type,
-        transactions.quantity,
-        transactions.description 
+        transactions.id, 
+        transactions.`transaction`, 
+        transactions.quantity, 
+        transactions.description, 
+        transactions.created_at, 
+        nature.nature, 
+        accounts.account, 
+        operator.operator
     ')
-            ->join('ttransaction', 'transactions.type_fk = ttransaction.id')
+            ->join('operator', 'transactions.operator_fk = operator.id')
             ->join('accounts', 'transactions.account_fk = accounts.id')
-            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->join('nature', 'accounts.nature_fk = nature.id')
             ->findAll();
     }
 
     public function getOne($id)
     {
         return $this->select('
-        transactions.created_at AS date,
-        transactions.`transaction` AS reference,
-        taccount.`type-account` AS general,
-        accounts.account,
-        ttransaction.`type-transaction` AS type,
-        transactions.quantity,
-        transactions.description,
-        transactions.account_fk,
-        transactions.type_fk 
+        transactions.id, 
+        transactions.`transaction`, 
+        transactions.quantity, 
+        transactions.description, 
+        transactions.created_at, 
+        nature.nature, 
+        accounts.account, 
+        operator.operator
     ')
-            ->join('ttransaction', 'transactions.type_fk = ttransaction.id')
+            ->join('operator', 'transactions.operator_fk = operator.id')
             ->join('accounts', 'transactions.account_fk = accounts.id')
-            ->join('taccount', 'accounts.type_fk = taccount.id')
+            ->join('nature', 'accounts.nature_fk = nature.id')
             ->where('transactions.id', $id)
             ->first();
     }
