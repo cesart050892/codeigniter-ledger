@@ -76,6 +76,8 @@ $routes->get('transactions', 'Transactions::index');
 		$routes->get('/', 'Transactions::index');
 		$routes->get('delete/(:num)', 'Transactions::delete/$1');
 		$routes->get('edit/(:num)', 'Transactions::edit/$1');
+		$routes->post('/', 'Transactions::create');
+		$routes->post('update/(:num)', 'Transactions::update/$1');
 		$routes->group('operators', function ($routes) {
 			$routes->get('/', 'Operator::index');
 			$routes->get('delete/(:num)', 'Operator::delete/$1');

@@ -1,7 +1,7 @@
 <?= $this->extend('templates/main') ?>
 
 <?= $this->section('title') ?>
-transactions
+Transactions
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -10,10 +10,10 @@ transactions
     <!-- Basic Card Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between">
-            <h6 class="m-0 mt-1 font-weight-bold text-primary">transactions</h6>
+            <h6 class="m-0 mt-1 font-weight-bold text-primary">Transactions</h6>
             <button type="button" class="btn btn-primary btn-sm" id="btn-new-transaction">
                 <i class="fas fa-plus-square"></i>
-                Add New transaction
+                Add New Transaction
             </button>
         </div>
         <div class="card-body">
@@ -78,7 +78,8 @@ transactions
                     data: null,
                     title: "Date",
                     render: function(data) {
-                        return `${moment(data.created_at.date).fromNow()}`;
+                        formats = ['MMMM Do YYYY, h:mm:ss a']
+                        return `${moment(data.created_at.date).calendar()}`;
                     },
                 },
                 {

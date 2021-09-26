@@ -57,4 +57,71 @@ class Transactions extends ResourceController
         }
     }
 
+    public function create()
+    {
+        try {
+            //
+            if ($this->validate(array(
+                'account'       => 'required|numeric',
+                'operator'      => 'required|numeric',
+                'quantity'      => 'required|decimal',
+                'description'   => 'required'
+            ))) {
+                $data = [
+                    'account_fk'        =>  $this->request->getPost('account'),
+                    'operator_fk'       =>  $this->request->getPost('operator'),
+                    'quantity'          =>  $this->request->getPost('quantity'),
+                    'description'       =>  $this->request->getPost('description'),
+                ];
+                $account = new \App\Entities\Transactions($data);
+                if ($this->model->save($account)) {
+                    return $this->respondCreated(array(
+                        'message' => 'created'
+                    ));
+                } else {
+                    return $this->failValidationErrors($this->model->validator->getErrors());
+                }
+            } else {
+                return $this->failValidationErrors($this->validator->getErrors());
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->failServerError();
+        }
+    }
+
+    public function update($id = null)
+    {
+        try {
+            //
+            if ($this->validate(array(
+                'account'       => 'required|numeric',
+                'operator'      => 'required|numeric',
+                'quantity'      => 'required|decimal',
+                'description'   => 'required'
+            ))) {
+                $data = [
+                    'id'            => $id,
+                    'account_fk'    =>  $this->request->getPost('account'),
+                    'operator_fk'   =>  $this->request->getPost('operator'),
+                    'quantity'      =>  $this->request->getPost('quantity'),
+                    'description'   =>  $this->request->getPost('description'),
+                ];
+                $account = new \App\Entities\Transactions($data);
+                if ($this->model->save($account)) {
+                    return $this->respondCreated(array(
+                        'message' => 'created'
+                    ));
+                } else {
+                    return $this->failValidationErrors($this->model->validator->getErrors());
+                }
+            } else {
+                return $this->failValidationErrors($this->validator->getErrors());
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->failServerError();
+        }
+    }
+
 }
