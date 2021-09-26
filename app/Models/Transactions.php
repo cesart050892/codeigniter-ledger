@@ -70,7 +70,9 @@ class Transactions extends Model
         transactions.created_at, 
         nature.nature, 
         accounts.account, 
-        operator.operator
+        operator.operator,
+        transactions.account_fk as account_id, 
+        transactions.operator_fk as operator_id
     ')
             ->join('operator', 'transactions.operator_fk = operator.id')
             ->join('accounts', 'transactions.account_fk = accounts.id')

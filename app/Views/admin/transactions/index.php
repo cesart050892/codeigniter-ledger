@@ -51,7 +51,7 @@ transactions
     });
 
         //------- Select2 -------------
-        $('#input-type').select2({
+        $('.select-modal').select2({
             theme: 'bootstrap4',
             dropdownParent: $("#transactionModal")
         });
@@ -159,9 +159,16 @@ transactions
     }
 
     function getSelect() {
-        $.get(baseUrl + '/api/transactions/type', (response) => {
+        $.get(baseUrl + '/api/accounts', (response) => {
             $.each(response.data, function(key, value) {
-                $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
+                $('#input-account').append(`<option value="${value.id}">${value.account}</option>`);
+            });
+            window.stateSelect = false
+        });
+
+        $.get(baseUrl + '/api/transactions/operators', (response) => {
+            $.each(response.data, function(key, value) {
+                $('#input-operator').append(`<option value="${value.id}">${value.operator}</option>`);
             });
             window.stateSelect = false
         });
@@ -252,19 +259,25 @@ transactions
     }
 
     function renderUpdate(data) {
+        // Style
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
-        $('#input-type').val(data.result.foreign).trigger('change');
-        $('#input-transaction').val(data.result.transaction)
-        $('#input-code').val(data.result.code)
+        // Data
+        $('#input-account').val(data.result.account_id).trigger('change');
+        $('#input-operator').val(data.result.operator_id).trigger('change');
+        $('#input-quantity').val(data.result.quantity)
+        $('#input-description').val(data.result.description)
     }
 
     function renderSave(data) {
+        // Style
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
-        $('#input-type').val(null).trigger('change');
-        $('#input-transaction').val('')
-        $('#input-code').val('')
+        // Data
+        $('#input-account').val(null).trigger('change');
+        $('#input-operator').val(null).trigger('change');
+        $('#input-quantity').val('')
+        $('#input-description').val('')
     }
 </script>
 <?= $this->endSection() ?>
@@ -287,14 +300,14 @@ transactions
                         <div class="form-group row">
                             <label for="input-account" class="col-4 col-form-label">Account</label>
                             <div class="col-8">
-                                <select id="input-account" name="account" required="required" class="custom-select">
+                                <select id="input-account" name="account" required="required" class="custom-select select-modal">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input-operator" class="col-4 col-form-label">operator</label>
+                            <label for="input-operator" class="col-4 col-form-label">Operator</label>
                             <div class="col-8">
-                                <select id="input-operator" name="operator" required="required" class="custom-select">
+                                <select id="input-operator" name="operator" required="required" class="custom-select select-modal">
                                 </select>
                             </div>
                         </div>
