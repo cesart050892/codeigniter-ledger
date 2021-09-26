@@ -15,11 +15,14 @@ class Transactions extends Entity
     protected $casts   = [];
 
     protected function setTransaction(string $password)
-	{
-		$data = model('App\Models\Transactions', false);
-        $result = $data->getLast();
-        $res = explode(00, $result->transaction);
-        $this->attributes['transaction'] = $res[0]."00".($res[2]+1);
-		return $this;
-	}
+    {
+        $data = model('App\Models\Transactions', false);
+        if ($result = $data->getLast()) {
+            list($suffix, $patron, $number) = explode(00, $result->transaction);
+            $this->attributes['transaction'] = $suffix . "00" . ($number + 1);
+        } else {
+            $this->attributes['transaction'] = 'TR001';
+        }
+        return $this;
+    }
 }
