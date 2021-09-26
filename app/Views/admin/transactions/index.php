@@ -285,33 +285,40 @@ transactions
                 <form autocomplete="off">
                     <div class="container">
                         <div class="form-group row">
-                            <label for="input-type" class="col-4 col-form-label">Type</label>
+                            <label for="input-account" class="col-4 col-form-label">Account</label>
                             <div class="col-8">
-                                <select id="input-type" name="input-type" required="required" class="custom-select">
+                                <select id="input-account" name="account" required="required" class="custom-select">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input-transaction" class="col-4 col-form-label">transaction</label>
+                            <label for="input-operator" class="col-4 col-form-label">operator</label>
+                            <div class="col-8">
+                                <select id="input-operator" name="operator" required="required" class="custom-select">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input-quantity" class="col-4 col-form-label">Quantity</label>
                             <div class="col-8">
                                 <div class="input-group">
-                                    <input id="input-transaction" name="input-transaction" type="text" required="required" class="form-control">
+                                    <input id="input-quantity" name="quantity" type="text" required="required" class="form-control">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <i class="fa fa-address-card"></i>
+                                            <i class="fas fa-calculator"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input-code" class="col-4 col-form-label">Code</label>
+                            <label for="input-description" class="col-4 col-form-label">Description</label>
                             <div class="col-8">
                                 <div class="input-group">
-                                    <input id="input-code" name="input-code" type="text" required="required" class="form-control">
+                                    <input id="input-description" name="description" type="text" required="required" class="form-control">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <i class="fas fa-list-ol"></i>
+                                            <i class="fas fa-keyboard"></i>
                                         </div>
                                     </div>
                                 </div>
