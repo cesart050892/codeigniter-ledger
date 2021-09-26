@@ -68,6 +68,7 @@ class Transactions extends ResourceController
                 'description'   => 'required'
             ))) {
                 $data = [
+                    'transaction'       => '',
                     'account_fk'        =>  $this->request->getPost('account'),
                     'operator_fk'       =>  $this->request->getPost('operator'),
                     'quantity'          =>  $this->request->getPost('quantity'),

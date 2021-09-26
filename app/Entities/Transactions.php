@@ -13,4 +13,13 @@ class Transactions extends Entity
         'deleted_at',
     ];
     protected $casts   = [];
+
+    protected function setTransaction(string $password)
+	{
+		$data = model('App\Models\Transactions', false);
+        $result = $data->getLast();
+        $res = explode(00, $result->transaction);
+        $this->attributes['transaction'] = $res[0]."00".($res[2]+1);
+		return $this;
+	}
 }

@@ -80,4 +80,25 @@ class Transactions extends Model
             ->where('transactions.id', $id)
             ->first();
     }
+
+    public function getLast()
+    {
+        return $this->select('
+        transactions.id, 
+        transactions.`transaction`, 
+        transactions.quantity, 
+        transactions.description, 
+        transactions.created_at, 
+        nature.nature, 
+        accounts.account, 
+        operator.operator,
+        transactions.account_fk as account_id, 
+        transactions.operator_fk as operator_id
+    ')
+            ->join('operator', 'transactions.operator_fk = operator.id')
+            ->join('accounts', 'transactions.account_fk = accounts.id')
+            ->join('nature', 'accounts.nature_fk = nature.id')
+            ->orderBy('created_at', 'desc')
+            ->first();
+    }
 }
