@@ -132,9 +132,9 @@ Transactions
             responsive: true,
         });
 
-        setInterval(function() {
+/*         setInterval(function() {
             table.ajax.reload();
-        }, 1000);
+        }, 1000); */
 
     function destroy(id) {
         swal.fire({

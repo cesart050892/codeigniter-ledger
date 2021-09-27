@@ -14,7 +14,7 @@ class Users extends Seeder
         $credentials = [
             [
                 'username' => 'admin',
-                'email'    => 'admin@email.com',
+                'email'    => 'admin@ledger.com',
                 'password' => 'admin'
             ],
         ];
@@ -26,9 +26,10 @@ class Users extends Seeder
         $userModel = model('App\Models\Users', false);
         $users = [
             [
-                'name' => 'admin',
-                'address'    => 'admin@email.com',
-                'phone' => 'admin',
+                'name'          => 'cesar a.',
+                'surname'       => 'tapia',
+                'address'       => 'admin@email.com',
+                'phone'         => 'admin',
                 'credential_fk' => $authModel->insertID()
             ],
         ];

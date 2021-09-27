@@ -32,6 +32,7 @@ class Auth extends ResourceController
                         "name"    => $this->request->getVar("name"),
                         "credential_fk"   => $this->model->insertID()
                     ];
+                    if ($this->request->getVar("surname")) $data += ['surname' => $this->request->getVar("surname")];
                     $userModel = model('App\Models\Users', false);
                     $user = new \App\Entities\Users($data);
                     if ($userModel->save($user)) {

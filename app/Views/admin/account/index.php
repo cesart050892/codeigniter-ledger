@@ -140,8 +140,9 @@ Accounts
 
     function getSelect() {
         $.get(baseUrl + '/api/accounts/type', (response) => {
+            console.log(response)
             $.each(response.data, function(key, value) {
-                $('#input-type').append(`<option value="${value.id}">${value.type}</option>`);
+                $('#input-type').append(`<option value="${value.id}">${value.nature}</option>`);
             });
             window.stateSelect = false
         });

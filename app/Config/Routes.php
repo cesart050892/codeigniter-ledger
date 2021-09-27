@@ -55,24 +55,25 @@ $routes->get('transactions', 'Transactions::index');
 		$routes->post('login', 'Auth::login');
 	});
 
-	$routes->group('me', function ($routes) {
+	$routes->group('me', ['namespace' => 'App\Controllers\Api', 'filter' => 'api'], function ($routes) {
+		$routes->get('/', 'Users::profile');
 		$routes->get('logout', 'Auth::logout');
 	});
 
-	$routes->group('accounts', function ($routes) {
+	$routes->group('accounts', ['namespace' => 'App\Controllers\Api', 'filter' => 'api'], function ($routes) {
 		$routes->get('/', 'Accounts::index');
 		$routes->get('delete/(:num)', 'Accounts::delete/$1');
 		$routes->get('edit/(:num)', 'Accounts::edit/$1');
 		$routes->post('/', 'Accounts::create');
 		$routes->post('update/(:num)', 'Accounts::update/$1');
 		$routes->group('type', function ($routes) {
-			$routes->get('/', 'Taccounts::index');
-			$routes->get('delete/(:num)', 'Taccounts::delete/$1');
-			$routes->get('edit/(:num)', 'Taccounts::edit/$1');
+			$routes->get('/', 'Nature::index');
+			$routes->get('delete/(:num)', 'Nature::delete/$1');
+			$routes->get('edit/(:num)', 'Nature::edit/$1');
 		});
 	});
 
-	$routes->group('transactions', function ($routes) {
+	$routes->group('transactions', ['namespace' => 'App\Controllers\Api', 'filter' => 'api'], function ($routes) {
 		$routes->get('/', 'Transactions::index');
 		$routes->get('delete/(:num)', 'Transactions::delete/$1');
 		$routes->get('edit/(:num)', 'Transactions::edit/$1');
