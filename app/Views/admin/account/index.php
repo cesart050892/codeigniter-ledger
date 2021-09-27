@@ -53,7 +53,8 @@ Accounts
         //------- Select2 -------------
         $('#input-type').select2({
             theme: 'bootstrap4',
-            dropdownParent: $("#accountModal")
+            dropdownParent: $("#accountModal"),
+            minimumResultsForSearch: Infinity
         });
         //------- SweetAlert2 -------------
         const swal = Swal.mixin({

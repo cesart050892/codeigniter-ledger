@@ -53,7 +53,8 @@ Transactions
         //------- Select2 -------------
         $('.select-modal').select2({
             theme: 'bootstrap4',
-            dropdownParent: $("#transactionModal")
+            dropdownParent: $("#transactionModal"),
+            minimumResultsForSearch: 5
         });
         //------- SweetAlert2 -------------
         const swal = Swal.mixin({
