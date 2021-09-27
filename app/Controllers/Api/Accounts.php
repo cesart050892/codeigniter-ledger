@@ -68,7 +68,7 @@ class Accounts extends ResourceController
             ))) {
                 $data = [
                     'code'      =>  $this->request->getPost('input-code'),
-                    'type_fk'   =>  $this->request->getPost('input-type'),
+                    'nature_fk'   =>  $this->request->getPost('input-type'),
                     'account'   =>  $this->request->getPost('input-account')
                 ];
                 $account = new \App\Entities\Accounts($data);
