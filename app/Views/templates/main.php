@@ -49,7 +49,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; <a href="https://github.com/whoami-sudo-command/ledger" target="blank">Ledger</a> - <a href="https://github.com/cesart050892">Cesar A. Tapia</a> 2020</span>
                     </div>
                 </div>
             </footer>
