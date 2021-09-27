@@ -233,9 +233,10 @@ Accounts
     }
 
     function renderUpdate(data) {
+        console.log()
         $('.modal-title').text(data.title)
         $('.btn-submit').text(data.title)
-        $('#input-type').val(data.result.foreign).trigger('change');
+        $('#input-type').val(data.result.nature_fk).trigger('change');
         $('#input-account').val(data.result.account)
         $('#input-code').val(data.result.code)
     }
