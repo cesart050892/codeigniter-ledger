@@ -44,7 +44,7 @@ class Accounts extends Model
 
     public function getAll()
     {
-        return $this->select('
+        $data = $this->select('
         accounts.id,
         nature.nature,
         nature.`code` AS general,
@@ -54,11 +54,13 @@ class Accounts extends Model
     ')
             ->join('nature', 'accounts.nature_fk = nature.id')
             ->findAll();
+        if (!$data) throw new \Exception('Could not find post for specified ID');
+        return $data;
     }
 
     public function getOne($id)
     {
-        return $this->select('
+        $data = $this->select('
         accounts.id,
         nature.nature,
         nature.`code` AS general,
@@ -69,5 +71,7 @@ class Accounts extends Model
             ->join('nature', 'accounts.nature_fk = nature.id')
             ->where('accounts.id', $id)
             ->first();
+        if (!$data) throw new \Exception('Could not find for specified ID');
+        return $data;
     }
 }
