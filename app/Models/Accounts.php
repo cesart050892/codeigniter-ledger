@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\ItemNotFoundException;
 use CodeIgniter\Model;
 
 class Accounts extends Model
@@ -54,7 +55,7 @@ class Accounts extends Model
     ')
             ->join('nature', 'accounts.nature_fk = nature.id')
             ->findAll();
-        if (!$data) throw new \Exception('Could not find post for specified ID');
+        if (!$data)  throw new ItemNotFoundException('Could not find');
         return $data;
     }
 
@@ -71,7 +72,7 @@ class Accounts extends Model
             ->join('nature', 'accounts.nature_fk = nature.id')
             ->where('accounts.id', $id)
             ->first();
-        if (!$data) throw new \Exception('Could not find for specified ID');
+        if (!$data) throw new ItemNotFoundException('Could not find for specified ID');
         return $data;
     }
 }

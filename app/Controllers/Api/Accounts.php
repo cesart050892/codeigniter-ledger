@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Api;
 
+use App\Exceptions\ItemNotFoundException;
 use CodeIgniter\RESTful\ResourceController;
 
 class Accounts extends ResourceController
@@ -18,9 +19,13 @@ class Accounts extends ResourceController
             return $this->respond(array(
                 'data'    => $res
             ));
-        } catch (\Throwable $th) {
-            //throw $th;
-            return $this->failServerError();
+        } catch (ItemNotFoundException $e) {
+            return $this->respond(
+                [
+                    'message' => $e->getMessage(),
+                ],
+                404
+            );
         }
     }
 
